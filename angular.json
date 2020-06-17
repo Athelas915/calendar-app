@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "calendar-app"
+    }
+  },
+  "defaultProject": "calendar-app",
+  "cli": {
+    "analytics": "c2221e7e-bf74-4d32-8f5e-98c25c1e5ed5"
+  }
 }
