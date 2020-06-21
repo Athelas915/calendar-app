@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  title = 'calendar-app';
+  title = 'Fitness Club Calendar';
+  month: number;
+  year: number;
+
+  constructor() {
+    this.month = 1;
+    this.year = 2020;
+  }
 }
