@@ -1,0 +1,55 @@
+@use 'src/app/app.component' as root
+
+
+$day-padding: 8px
+
+
+div.day
+  text-align: left
+  border: 1px solid black
+  height: root.$day-height
+  width: root.$day-width
+  margin: -3px + root.$day-margin
+  background-color: root.$day-color
+
+
+
+%fill-div
+  display: block
+  height: 100%
+  width: 100%
+  text-decoration: none
+  color: black
+
+
+a.active
+  @extend %fill-div
+  background-color: root.$day-color
+
+
+a.inactive
+  @extend %fill-div
+  background-color: root.$day-inactive-color
+
+
+a.clickable
+  @extend %fill-div
+
+
+a.clickable:hover
+  background-color: root.$day-hover
+
+
+a.unclickable
+  @extend %fill-div
+  pointer-events: none
+
+
+div.padding
+  text-align: left
+  padding: $day-padding
+
+
+
+a.today
+  background-color: #9ec3ff

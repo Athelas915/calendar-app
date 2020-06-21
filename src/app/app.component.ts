@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Data } from './header/header.component'
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,13 @@ export class AppComponent {
   year: number;
 
   constructor() {
-    this.month = 1;
-    this.year = 2020;
+    var dateNow = new Date();
+    this.month = dateNow.getMonth();
+    this.year = dateNow.getFullYear();
+  }
+
+  dataChanged(newData: Data) {
+    this.month = newData.month;
+    this.year = newData.year;
   }
 }

@@ -1,7 +1,9 @@
-div
-  text-align: center
+@use 'src/app/app.component' as root
 
 
-.bordered
+div.footer
+  background-color: root.$fhc-color
   border: 1px solid black
-  padding: 5px
+  margin: root.$std-margin
+  height: root.$hf-height
+  width: root.$hf-width

@@ -1,7 +1,7 @@
-<div class="bordered">
+<div class="calendar">
   <table class="centered">
     <thead>
-      <tr>
+      <tr class="weeknames">
         <th *ngFor="let day of weekdays">
           {{ day }}
         </th>
@@ -9,8 +9,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let week of days; let i = index">
-        <td *ngFor="let day of week">
-          <app-day [day]="day" [month]="month" [year]="year"></app-day>
+        <td *ngFor="let day of week; let j = index">
+          <app-day [day]="days[i][j]" [month]="month" [year]="year" [active] ="activeDays[i][j]"></app-day>
         </td>
       </tr>
     </tbody>

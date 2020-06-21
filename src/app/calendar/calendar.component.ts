@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { WeekDay } from '@angular/common';
 
 @Component({
@@ -6,22 +6,39 @@ import { WeekDay } from '@angular/common';
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.sass']
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, OnChanges {
 
   @Input('month') month: number;
   @Input('year') year: number;
 
   days: number[][];
+  activeDays: boolean[][];
   weekdays: string[];
+
 
   constructor() {
   }
 
   ngOnInit(): void {
     this.weekdays = weekdayList();
-    this.days = fillDays(this.month, this.year);
-
   }
+
+  ngOnChanges(): void {
+    this.days = fillDays(this.month, this.year);
+    this.activeDays = flagInactive(this.days);
+  }
+}
+
+function flagInactive(arr: number[][]): boolean[][] {
+  var result = [...Array(arr.length)].map(x => Array(arr[0].length).fill(true))
+
+  for (var i = 0; i < arr.length; i++) {
+    for (var j = 0; j < arr[0].length; j++) {
+      if ((i == 0 && arr[i][j] > 7) || (i == arr.length - 1 && arr[i][j] < 7)) result[i][j] = false;
+      else result[i][j] = true;
+    }
+  }
+  return result;
 }
 
 function weekdayList(): string[] {

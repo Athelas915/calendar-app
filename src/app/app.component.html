@@ -1,7 +1,10 @@
-<h1>{{ title }}</h1>
 
-<div class="bordered">
-  <app-header></app-header>
-  <app-calendar [month]="month - 1" [year]="year"></app-calendar>
-  <app-footer></app-footer>
-</div>
+  <body class="root">
+    <h1>{{ title }}</h1>
+
+    <div class="root">
+      <app-header [month]="month" [year]="year" (dataChanged)="dataChanged($event)"></app-header>
+      <app-calendar [month]="month" [year]="year"></app-calendar>
+      <app-footer></app-footer>
+    </div>
+  </body>
