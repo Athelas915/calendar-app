@@ -8,11 +8,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let week of days; let i = index">
-        <td *ngFor="let day of week; let j = index">
-          <app-day [day]="days[i][j]" [month]="month" [year]="year" [active] ="activeDays[i][j]"></app-day>
+      <tr *ngFor="let dataRow of data; let i = index">
+        <td *ngFor="let dataPoint of dataRow; let j = index">
+          <app-day [day]="data[i][j].day" [month]="month" [year]="year" [active]="data[i][j].active" [sessions]="data[i][j].sessions"></app-day>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
+

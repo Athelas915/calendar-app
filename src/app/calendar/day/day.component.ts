@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Session } from '../../models/session.model';
 
 @Component({
   selector: 'app-day',
@@ -10,6 +11,7 @@ export class DayComponent implements OnInit {
   @Input('month') month: number;
   @Input('year') year: number;
   @Input('active') active: boolean;
+  @Input('sessions') sessions: Session[];
 
   clickable: boolean;
 
@@ -19,7 +21,7 @@ export class DayComponent implements OnInit {
     if (!this.active) return;
     else {
     }
-    this.clickable = this.active;
+    this.clickable = (this.active && this.sessions.length > 0);
   }
 
   isClickableAndActive(cl: boolean, act: boolean): string {

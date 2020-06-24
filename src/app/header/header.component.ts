@@ -100,7 +100,7 @@ enum Months {
 }
 
 
-export interface Data {
+export type Data = {
   year: number;
   month: number;
 }
