@@ -9,6 +9,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { DayComponent } from './calendar/day/day.component';
 import { SessionsComponent } from './calendar/sessions/sessions.component';
+import { SessionsService } from './services/sessions.service';
+import { DayTableService } from './services/day-table.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,10 @@ import { SessionsComponent } from './calendar/sessions/sessions.component';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    SessionsService,
+    DayTableService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

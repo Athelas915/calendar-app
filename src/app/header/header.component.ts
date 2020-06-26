@@ -1,69 +1,75 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
+import { DayTableService } from '../services/day-table.service';
+import { ShortDate } from '../models/short-date.model';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.sass']
 })
-export class HeaderComponent implements OnInit, OnChanges {
-  @Input("month") currentMonth: number;
-  @Input("year") currentYear: number;
-  @Output() dataChanged = new EventEmitter<Data>();
+export class HeaderComponent {
+  private dayTableService: DayTableService;
 
-  curMonthName: string;
-  monthList: string[];
+  get currentMonth() {
+    return this.dayTableService.month;
+  }
+  set currentMonth(value: number) {
+    this.dayTableService.month = value;
+    this.curMonthName = getMonthName(this.currentMonth);
+  }
+  get currentYear() {
+    return this.dayTableService.year;
+  }
+  set currentYear(value: number) {
+    this.dayTableService.year = value;  
+  }
+  
   monthSelect: number;
   yearSelect: number;
+  curMonthName: string;
+  monthList: string[];
 
-  constructor() {
+  constructor(dayTableService: DayTableService) {
+    this.dayTableService = dayTableService;
+
+    this.monthSelect = this.currentMonth;
+    this.curMonthName = getMonthName(this.currentMonth);
+    this.yearSelect = this.currentYear;
+
     this.monthList = monthList();
   }
 
-  ngOnInit(): void {
-  }
+  goNextMonth() {
+    this.currentMonth += 1;
+    this.currentYear = this.currentYear;
 
-  ngOnChanges(): void {
-    this.curMonthName = getMonthName(this.currentMonth);
     this.monthSelect = this.currentMonth;
     this.yearSelect = this.currentYear;
   }
 
-  changeData(newMonth, newYear) {
-    var mo = mod(newMonth, 12);
-    var yr = newYear;
-    var result: Data = {
-      month: mo,
-      year: yr
-    }
-    this.dataChanged.emit(result);
-  }
-
-  goNextMonth() {
-    var mo: number, yr: number;
-
-    if (this.currentMonth == 11) {
-      yr = this.currentYear + 1;
-    }
-    else {
-      yr = this.currentYear;
-    }
-    mo = this.currentMonth + 1;
-    this.changeData(mo, yr);
-  }
-
   goPreviousMonth() {
-    var mo: number, yr: number;
+    this.currentMonth -= 1;
+    this.currentYear = this.currentYear;
 
-    if (this.currentMonth == 0) {
-      yr = this.currentYear - 1;
-    }
-    else {
-      yr = this.currentYear;
-    }
-    mo = this.currentMonth - 1;
-    this.changeData(mo, yr);
+    this.monthSelect = this.currentMonth;
+    this.yearSelect = this.currentYear;
+  }
+  goToDate() {
+    this.currentMonth = this.monthSelect;
+    this.currentYear = this.yearSelect;
+
+    this.monthSelect = this.currentMonth;
+    this.yearSelect = this.currentYear;
   }
 
+  goToCurrent() {
+    var date = new ShortDate();
+    this.currentMonth = date.month;
+    this.currentYear = date.year;
+
+    this.monthSelect = this.currentMonth;
+    this.yearSelect = this.currentYear;
+  }
 }
 
 function monthList(): string[] {

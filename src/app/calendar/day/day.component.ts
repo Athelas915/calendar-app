@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Session } from '../../models/session.model';
+import { SessionsService } from '../../services/sessions.service';
+import { ShortDate } from '../../models/short-date.model';
 
 @Component({
   selector: 'app-day',
@@ -11,17 +13,25 @@ export class DayComponent implements OnInit {
   @Input('month') month: number;
   @Input('year') year: number;
   @Input('active') active: boolean;
-  @Input('sessions') sessions: Session[];
+  @Input('sessions') sessions2: Session[];
+
+  test;
+
+  private sessionService: SessionsService;
+  sessions: Session[];
 
   clickable: boolean;
 
-  constructor() { }
+  constructor(sessionsService: SessionsService) {
+    this.sessionService = sessionsService;
+  }
 
   ngOnInit(): void {
+    this.sessions = this.sessionService.getSessionsOnDay(new ShortDate(this.day, this.month, this.year));
     if (!this.active) return;
     else {
+      this.clickable = (this.active && this.sessions.length > 0);
     }
-    this.clickable = (this.active && this.sessions.length > 0);
   }
 
   isClickableAndActive(cl: boolean, act: boolean): string {

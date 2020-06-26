@@ -7,6 +7,9 @@ $arrow-img-height: root.$hf-height * (1 - $pad-percent)
 $arrow-img-width: $arrow-img-height * 151 / 111
 
 $selector-height: root.$hf-height - 4 * $pad - 6px
+$column-width: root.$hf-width / 2 - 4 * $pad - 2px - $arrow-img-width
+
+$wide-narrow-ratio: 2
 
 
 div.header
@@ -22,7 +25,15 @@ div.column
   float: left
   padding: $pad
   font-size: root.$hf-height * (1 - 2 * $pad-percent) - 2px
-  width: root.$hf-width / 2 - 4 * $pad - 2px - $arrow-img-width
+  width: $column-width
+
+
+div.wide
+  width: 2 * $column-width * $wide-narrow-ratio / ( $wide-narrow-ratio + 1 )
+
+
+div.narrow
+  width: 2 * $column-width / ( $wide-narrow-ratio + 1 )
 
 
   
@@ -91,5 +102,14 @@ button.submit
   font-size: $selector-height
   height: auto
   width: $selector-height*4
+  float: left
+  padding: $pad
+
+
+
+button.today
+  font-size: $selector-height
+  height: auto
+  width: $selector-height*8
   float: left
   padding: $pad
