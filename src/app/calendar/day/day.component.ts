@@ -1,60 +1,78 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnChanges, Input } from '@angular/core';
 import { Session } from '../../models/session.model';
 import { SessionsService } from '../../services/sessions.service';
 import { ShortDate } from '../../models/short-date.model';
+import { DateAndActive } from '../calendar.component';
 
 @Component({
   selector: 'app-day',
   templateUrl: './day.component.html',
   styleUrls: ['./day.component.sass']
 })
-export class DayComponent implements OnInit {
-  @Input('day') day: number;
-  @Input('month') month: number;
-  @Input('year') year: number;
-  @Input('active') active: boolean;
-  @Input('sessions') sessions2: Session[];
-
-  test;
-
+export class DayComponent implements OnChanges {
   private sessionService: SessionsService;
-  sessions: Session[];
+  @Input('date-and-active') input: DateAndActive;
 
-  clickable: boolean;
+  get date(): ShortDate {
+    return this.input.date;
+  }
+  get active(): boolean {
+    return this.input.active;
+  }
+
+  sessions: Session[] = [];
+
+  uniqueTypes: string[];
 
   constructor(sessionsService: SessionsService) {
     this.sessionService = sessionsService;
+    this.input = { date: new ShortDate(), active: false }
   }
 
-  ngOnInit(): void {
-    this.sessions = this.sessionService.getSessionsOnDay(new ShortDate(this.day, this.month, this.year));
-    if (!this.active) return;
-    else {
-      this.clickable = (this.active && this.sessions.length > 0);
-    }
+  ngOnChanges(): void {
+    this.sessions = this.sessionService.getSessionsOnDay(this.date);
+    this.uniqueTypes = getUniqueTypes(this.sessions);
   }
 
-  isClickableAndActive(cl: boolean, act: boolean): string {
-    var now = new Date();
-    var nowDay = now.getDate();
-    var nowMonth = now.getMonth();
-    var nowYear = now.getFullYear();
+  
+  isClickableAndActive(): string {
+    var now = new ShortDate();
 
     var today: string;
-    if (this.year == nowYear && this.month == nowMonth && this.day == nowDay) today = "today";
+    if (now.isSameAs(this.date)) today = "today";
     else today = "";
 
+
     var classActive: string;
-    if (act
-        && (this.year > nowYear
-        || (this.year == nowYear && this.month > nowMonth)
-        || (this.year == nowYear && this.month == nowMonth && this.day >= nowDay))) classActive = "active";
-    else classActive =  "inactive";
+    if (!now.isBiggerThan(this.date) && this.active) classActive = "active";
+    else classActive = "inactive";
 
     var classClickable: string;
-    if (cl) classClickable = "clickable";
+    if (this.active && this.sessions.length > 0) classClickable = "clickable";
     else classClickable = "unclickable";
 
     return classActive + ' ' + classClickable + ' ' + today;
   }
+
+  onClick() {
+    this.sessionService.popup = this.date;
+  }
+}
+
+function getUniqueTypes(sessions: Session[]): string[] {
+  var result = [];
+
+  for (let se of sessions) {
+    if (!result.includes(" " + se.type)) {
+      result.push(" " + se.type);
+    }
+  }
+
+  if (result.length > 3) {
+    while (result.length > 3) {
+      result.pop();
+    }
+    result[result.length - 1] += "...";
+  }
+  return result;
 }

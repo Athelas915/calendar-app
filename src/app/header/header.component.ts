@@ -13,15 +13,8 @@ export class HeaderComponent {
   get currentMonth() {
     return this.dayTableService.month;
   }
-  set currentMonth(value: number) {
-    this.dayTableService.month = value;
-    this.curMonthName = getMonthName(this.currentMonth);
-  }
   get currentYear() {
     return this.dayTableService.year;
-  }
-  set currentYear(value: number) {
-    this.dayTableService.year = value;  
   }
   
   monthSelect: number;
@@ -33,42 +26,41 @@ export class HeaderComponent {
     this.dayTableService = dayTableService;
 
     this.monthSelect = this.currentMonth;
-    this.curMonthName = getMonthName(this.currentMonth);
+    this.curMonthName = Months[this.currentMonth];
     this.yearSelect = this.currentYear;
 
     this.monthList = monthList();
   }
 
-  goNextMonth() {
-    this.currentMonth += 1;
-    this.currentYear = this.currentYear;
-
+  private goTo(mo: number, yr: number) {
+    this.dayTableService.update(mo, yr);
+    this.curMonthName = Months[this.currentMonth]     
     this.monthSelect = this.currentMonth;
-    this.yearSelect = this.currentYear;
+    this.yearSelect = yr;
+  }
+
+  goNextMonth() {
+    var mo = this.currentMonth + 1;
+    var yr = this.currentYear;
+    this.goTo(mo, yr);
   }
 
   goPreviousMonth() {
-    this.currentMonth -= 1;
-    this.currentYear = this.currentYear;
-
-    this.monthSelect = this.currentMonth;
-    this.yearSelect = this.currentYear;
+    var mo = this.currentMonth - 1;
+    var yr = this.currentYear;
+    this.goTo(mo, yr);
   }
   goToDate() {
-    this.currentMonth = this.monthSelect;
-    this.currentYear = this.yearSelect;
-
-    this.monthSelect = this.currentMonth;
-    this.yearSelect = this.currentYear;
+    var mo = this.monthSelect;
+    var yr = this.yearSelect;
+    this.goTo(mo, yr);
   }
 
   goToCurrent() {
     var date = new ShortDate();
-    this.currentMonth = date.month;
-    this.currentYear = date.year;
-
-    this.monthSelect = this.currentMonth;
-    this.yearSelect = this.currentYear;
+    var mo = date.month;
+    var yr = date.year;
+    this.goTo(mo, yr);
   }
 }
 
@@ -80,14 +72,6 @@ function monthList(): string[] {
     return String(value);
   });
   return months;
-}
-
-function getMonthName(no: number): string {
-  return Months[no];
-}
-
-function mod(n, m) {
-  return ((n % m) + m) % m;
 }
 
 enum Months {

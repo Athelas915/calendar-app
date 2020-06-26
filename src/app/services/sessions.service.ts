@@ -9,6 +9,8 @@ export class SessionsService {
   datesAndSessions: DateWSessions[];
   sessions: Session[];
 
+  popup: ShortDate = null;
+
   constructor() {
     var sessions = mockData(5);
     this.sessions = sessions;
@@ -24,6 +26,7 @@ export class SessionsService {
       return element.date.isSameAs(date);
     }
   }
+
 }
 
 

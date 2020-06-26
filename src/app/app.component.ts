@@ -10,21 +10,16 @@ import { DayTableService } from './services/day-table.service';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent implements OnInit {
-  private dayTableService: DayTableService;
+  sessionsService: SessionsService;
 
   title = 'Fitness Club Calendar';
-  sessions: Session[];
 
-  get month() {
-    return this.dayTableService.month;
-  }
-  get year() {
-    return this.dayTableService.year;
+  get test() {
+    return this.sessionsService.popup;
   }
 
-  constructor(sessionsService: SessionsService, dayTableService: DayTableService) {
-    this.dayTableService = dayTableService;
-    this.sessions = sessionsService.sessions;
+  constructor(sessionsService: SessionsService) {
+    this.sessionsService = sessionsService;
   }
 
   ngOnInit() {

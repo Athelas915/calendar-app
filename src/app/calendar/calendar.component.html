@@ -8,9 +8,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let dataRow of data; let i = index">
-        <td *ngFor="let dataPoint of dataRow; let j = index">
-          <app-day [day]="data[i][j].day" [month]="month" [year]="year" [active]="data[i][j].active" [sessions]="data[i][j].sessions"></app-day>
+      <tr *ngFor="let i of weeksIt">
+        <td *ngFor="let j of daysIt">
+          <app-day [date-and-active]="getDate(i,j)"></app-day>
         </td>
       </tr>
     </tbody>

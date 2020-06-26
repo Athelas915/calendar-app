@@ -1,54 +1,40 @@
 import { WeekDay } from '@angular/common';
 
 export class ShortDate {
-  day: number;
-  month: number;
-  year: number;
+  get day() {
+    return this.date.getDate();
+  }
 
-  private _date: Date = null;
-  private get date(): Date {
-    if (this._date == null) this._date = new Date(this.year, this.month, this.day)
-    return this._date;
+  get month() {
+    return this.date.getMonth();
+  }
+
+  get year() {
+    return this.date.getFullYear();
+  }
+
+  private date: Date;
+
+  private _dateNow = null;
+  private get dateNow(): Date {
+    if (this._dateNow == null) this._dateNow = new Date();
+
+    return this._dateNow;
   }
 
   constructor(d: number = null, m: number = null, y: number = null) {
-    var dCount = daysInMonth(m, y);
-    var moff = 0;
-    var yoff = 0;
-    if (d == null && m == null && y == null) {
-      this._date = new Date();
-      this.day = this.date.getDate();
-      this.month = this.date.getMonth();
-      this.year = this.date.getFullYear();
+    var da = d, mo = m, yr = y;
+    if (da == null || mo == null || yr == null) {
+      if (da == null) da = this.dateNow.getDate();
+      if (mo == null) mo = this.dateNow.getMonth();
+      if (yr == null) yr = this.dateNow.getFullYear();
     }
-    else {
-      if (d == null) this.day = 1;
-      else if (d > dCount) {
-        this.day = d % dCount;
-        moff = (d - d % dCount) / dCount;
-      }
-      else if (d < 0) {
-        this.day = d;
-        while (this.day < 0) {
-          this.day += dCount;
-          moff -= 1;
-        }
-      }
-      else this.day = d;
 
-      if (m == null) this.month = moff;
-      else this.month = m + moff;
-      while (this.month < 0) {
-        this.month += 12;
-        yoff -= 1;
-      }
-      while (this.month > 11) {
-        this.month -= 12;
-        yoff += 1;
-      }
-      if (y == null) this.year = 1 + yoff;
-      else this.year = y + yoff;
-    }
+    this.date = new Date(yr, mo, da)
+  }
+
+  getWeekday(): number {
+    return this.date.getDay();
   }
 
   getWeekdayName(): string {
@@ -60,8 +46,19 @@ export class ShortDate {
   }
 
   isSameAs(otherDate: ShortDate): boolean {
+    if (otherDate == undefined) return false;
     if (this.day.valueOf() == otherDate.day.valueOf() && this.month.valueOf() == otherDate.month.valueOf() && this.year.valueOf() == otherDate.year.valueOf()) return true;
     else return false;
+  }
+
+  isBiggerThan(otherDate: ShortDate): boolean {
+    if (otherDate == undefined) return true;
+    if (
+      this.year > otherDate.year
+      || (this.year == otherDate.year && this.month > otherDate.month)
+      || (this.year == otherDate.year && this.month == otherDate.month && this.day > otherDate.day)
+    ) return true;
+    else return false
   }
 
   static FromDate(date: Date): ShortDate {
@@ -71,11 +68,6 @@ export class ShortDate {
   toString(): string {
     return this.day + "." + (this.month + 1) + "." + this.year;
   }
-}
-
-function daysInMonth(mo: number, yr: number): number {
-  var prvMo = new Date(yr, mo + 1, 0);
-  return prvMo.getDate();
 }
 
 enum Months {

@@ -1,7 +1,11 @@
 <div class="day">
-  <a href="https://www.google.com/" [ngClass]="isClickableAndActive(clickable, active)">
-    <div class="padding">{{day}}</div>
-    <div *ngIf="sessions.length > 0">Sessions: {{ sessions.length }}</div>
-    {{test}}
+  <a [ngClass]="isClickableAndActive()" (click)="onClick()">
+    <div class="padding">{{date.day}}</div>
+    <div class="sessions" *ngIf="sessions.length > 0">
+      <div>
+        Sessions: {{ sessions.length }}
+      </div>
+      <div>{{ uniqueTypes }}</div>
+    </div>
   </a>
 </div>
