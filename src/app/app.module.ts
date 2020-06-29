@@ -6,20 +6,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
 import { DayComponent } from './calendar/day/day.component';
-import { SessionsComponent } from './calendar/sessions/sessions.component';
+import { SessionsComponent } from './sessions/sessions.component';
 import { SessionsService } from './services/sessions.service';
 import { DayTableService } from './services/day-table.service';
+import { SingleSessionComponent } from './sessions/single-session/single-session.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CalendarComponent,
     HeaderComponent,
-    FooterComponent,
     DayComponent,
-    SessionsComponent
+    SessionsComponent,
+    SingleSessionComponent
   ],
   imports: [
     BrowserModule,

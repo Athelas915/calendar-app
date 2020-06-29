@@ -11,6 +11,8 @@ export class SessionsService {
 
   popup: ShortDate = null;
 
+  enrollment: number = -1;
+
   constructor() {
     var sessions = mockData(5);
     this.sessions = sessions;

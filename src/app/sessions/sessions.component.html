@@ -1,0 +1,7 @@
+<div class="disabled"></div>
+
+<div class="display">
+  <app-single-session *ngFor="let session of sessions, let i = index" [session]="sessions[i]" (enroll)="sendEnrollment($event)">
+  </app-single-session>
+  <button class="back" (click)="goBack()">Return</button>
+</div>

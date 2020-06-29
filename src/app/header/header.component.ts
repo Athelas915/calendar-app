@@ -74,7 +74,7 @@ function monthList(): string[] {
   return months;
 }
 
-enum Months {
+export enum Months {
   January = 0,
   February,
   March,

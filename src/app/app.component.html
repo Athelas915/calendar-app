@@ -6,5 +6,7 @@
       <app-header></app-header>
       <app-calendar></app-calendar>
     </div>
-    <app-sessions *ngIf="test != null"></app-sessions>
+    {{popupDate}}
+    <app-sessions *ngIf="popupDate != null"></app-sessions>
+    {{sessionsService.enrollment}}
   </body>

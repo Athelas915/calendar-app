@@ -3,6 +3,7 @@ import { Data } from './header/header.component'
 import { Session } from './models/session.model'
 import { SessionsService } from './services/sessions.service';
 import { DayTableService } from './services/day-table.service';
+import { ShortDate } from './models/short-date.model';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,7 @@ export class AppComponent implements OnInit {
 
   title = 'Fitness Club Calendar';
 
-  get test() {
+  get popupDate() {
     return this.sessionsService.popup;
   }
 

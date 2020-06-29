@@ -1,0 +1,12 @@
+<div>
+  {{session.start.hours}}, {{session.start.minutes}}
+  Type of session: {{session.type}} <br />
+  Coach: {{session.coach}} <br />
+  Date: {{toShortDateString(session.date)}} <br />
+  Time: {{toStartTimeString(session.start)}} <br />
+  Duration: {{toDurationString(session.duration)}} <br />
+  Room number: {{session.room}} <br />
+</div>
+
+
+<button (click)="enroll()">Enroll</button>
