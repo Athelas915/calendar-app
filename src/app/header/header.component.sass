@@ -85,7 +85,7 @@ img.arrow
 
 select.months
   font-size: root.$hf-height - 4 * $pad - 6px
-  height: auto
+  height: $arrow-img-height - $pad
   width: auto
   float: left
   padding: $pad
@@ -95,7 +95,7 @@ select.months
 
 input.year
   font-size: $selector-height
-  height: auto
+  height: $arrow-img-height - $pad * 4 + 1px
   width: $selector-height*3
   float: left
   padding: $pad
@@ -105,7 +105,7 @@ input.year
 
 button.submit
   font-size: $selector-height
-  height: auto
+  height: $arrow-img-height - $pad
   width: $selector-height*4
   float: left
   padding: $pad
@@ -114,7 +114,7 @@ button.submit
 
 button.today
   font-size: $selector-height
-  height: auto
+  height: $arrow-img-height - $pad
   width: $selector-height*8
   float: left
   padding: $pad

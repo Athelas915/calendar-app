@@ -1,0 +1,63 @@
+@use 'src/app/sessions/sessions.component' as table
+
+$bor: 1px
+$marg: table.$in-margin
+
+$div-width: ( table.$wi-value / 2 ) - 3 * $marg - 2 * $bor
+$fsize: 18px
+
+
+
+div.session
+  border: $bor solid black
+  padding: $marg
+  margin-top: $marg
+  margin-left: $marg
+  height: 100%
+  width: $div-width
+  text-align: left
+
+
+button.signup
+  font-size: $fsize
+  height: $fsize + $marg * 2
+  width: ($fsize + $marg) * 3
+  padding: $marg / 2
+  margin: $marg / 2
+
+
+
+
+div.paragraph
+  margin: 0
+  padding: 0
+  display: table
+  clear: both
+
+
+$tab-per: 0.25
+
+
+div.left
+  font-size: $fsize
+  text-align: left
+  float: left
+  width: $div-width * $tab-per
+
+
+
+div.info
+  font-size: $fsize
+  height: $fsize + $marg * 2 - 2px - ($marg * 2 - 2px) / 2
+  width: ($div-width - ($fsize + $marg) * 3) * 0.9
+  border: 1px solid black
+  margin: $marg / 2
+  text-align: center
+  padding-top: ($marg * 2 - 2px) / 2
+
+
+
+div.tab
+  font-size: $fsize
+  text-align: left
+  float: left

@@ -11,7 +11,7 @@ export class SessionsService {
 
   popup: ShortDate = null;
 
-  enrollment: number = -1;
+  change: number = -1;
 
   constructor() {
     var sessions = mockData(5);
@@ -29,6 +29,14 @@ export class SessionsService {
     }
   }
 
+  sendChangeRequest(id: number) {
+    var se = this.sessions.find(hasId);
+    se.isEnrolled = !se.isEnrolled;
+    function hasId(element) {
+      if (element.id == id) return true;
+      else return false;
+    }
+  }
 }
 
 
@@ -89,9 +97,10 @@ function mockData(n: number): Session[] {
     session.type = types[i % types.length];
     session.coach = coaches[i % coaches.length];
     session.room = i * 3 + 1;
-    session.date = new Date(today.getFullYear(), (today.getMonth() + 1) % 12, today.getDate() + i % 3);
+    session.date = new Date(today.getFullYear(), (today.getMonth()) % 12, today.getDate() + i % 3);
     session.start = { hours: 8 + i % 9, minutes: 0 }
     session.duration = { hours: 1, minutes: 30 }
+    session.isEnrolled = false;
 
     result[i] = session;
   }

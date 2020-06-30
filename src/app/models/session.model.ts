@@ -8,4 +8,5 @@ export class Session {
   start: Time;
   duration: Time;
   room: number;
+  isEnrolled: boolean;
 }

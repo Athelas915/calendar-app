@@ -10,13 +10,11 @@ import { Months } from '../../header/header.component';
 })
 export class SingleSessionComponent implements OnChanges {
   @Input("session") session: Session;
-  @Output("enroll") id = new EventEmitter<number>();
-  isEnrolled: boolean = false;
+  @Output("change") id = new EventEmitter<number>();
 
   constructor() { }
 
   ngOnChanges(): void {
-    this.isEnrolled = false;
   }
 
   toShortDateString(date: Date): string {
@@ -62,8 +60,26 @@ export class SingleSessionComponent implements OnChanges {
     return ho + min;
   }
 
-  enroll() {
+  get sessionFinished(): boolean {
+    var now = new Date();
+    if (this.session.date < now) return true;
+    else return false;
+  }
+
+  get buttonText(): string {
+    if (this.session.isEnrolled) return "Cancel";
+    else return "Sign up!"
+  }
+
+  get info(): string {
+    if (this.sessionFinished) return "Finished."
+    else {
+      if (this.session.isEnrolled) return "Signed up.";
+      else return "Not signed up."
+    }
+  }
+
+  change() {
     this.id.emit(this.session.id)
-    this.isEnrolled = true;
   }
 }
