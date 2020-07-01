@@ -10,7 +10,7 @@
     <tbody>
       <tr *ngFor="let i of weeksIt">
         <td *ngFor="let j of daysIt">
-          <app-day [date-and-active]="getDate(i,j)"></app-day>
+          <app-day [data]="getData(i,j)" (popup-date)="showPopup($event)"></app-day>
         </td>
       </tr>
     </tbody>

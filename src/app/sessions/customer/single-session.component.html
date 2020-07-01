@@ -1,9 +1,8 @@
 <div *ngIf="session != undefined" class="session">
   <div class="paragraph"><div class="left">Activity: </div><div class="tab">{{session.type}}</div></div>
   <div class="paragraph"><div class="left">Coach: </div><div class="tab">{{session.coach}}</div></div>
-  <div class="paragraph"><div class="left">Date: </div><div class="tab">{{toShortDateString(session.date)}}</div></div>
   <div class="paragraph"><div class="left">Time: </div><div class="tab">{{toStartTimeString(session.start)}}</div></div>
   <div class="paragraph"><div class="left">Duration: </div><div class="tab">{{toDurationString(session.duration)}}</div></div>
   <div class="paragraph"><div class="left">Room: </div><div class="tab">{{session.room}}</div></div>
-  <div class="paragraph"><div class="left info">Status: {{info}}</div><div class="tab"><button *ngIf="!sessionFinished" class="signup" (click)="change()">{{buttonText}}</button></div></div>
+  <div class="paragraph"><div class="left info">Status: {{info}}</div><div class="tab"><button *ngIf="!sessionStarted" class="signup" (click)="change()">{{buttonText}}</button></div></div>
 </div>

@@ -1,23 +1,25 @@
 <div class="disabled"></div>
 
+
 <div class="display">
+  <h2>Sessions on: {{toShortDateString(date)}}</h2>
   <div *ngFor="let i of keys">
     <div class="column">
-      <app-single-session *ngIf="i < 3" [session]="sessions[page * 6 + i]" (change)="sendChange($event)"></app-single-session>
+      <app-customer-sessions *ngIf="i < 3" [session]="sessions[page * 6 + i]" (change)="sendChange($event)"></app-customer-sessions>
     </div>
     <div class="column">
-      <app-single-session *ngIf="i >= 3" [session]="sessions[page * 6 + i]" (change)="sendChange($event)"></app-single-session>
+      <app-customer-sessions *ngIf="i >= 3" [session]="sessions[page * 6 + i]" (change)="sendChange($event)"></app-customer-sessions>
     </div>
   </div>
   <div class="footer">
     <div class="nav">
-      <button *ngIf="sessions.length > 6" class="footer-el" (click)="pageDown()">
+      <button *ngIf="arrowsVisible" class="footer-el" (click)="pageDown()">
         <img class="arrow" src="assets/images/arrow-left.png" alt="Arrow to previous page" />
       </button>
       <button *ngFor="let i of pageKeys" class="number" [ngClass]="isCurrentPage(i)" (click)="setPage(i)">
         {{i + 1}}
       </button>
-      <button *ngIf="sessions.length > 6" class="footer-el" (click)="pageUp()">
+      <button *ngIf="arrowsVisible" class="footer-el" (click)="pageUp()">
         <img class="arrow" src="assets/images/arrow-right.png" alt="Arrow to next page" />
       </button>
     </div>

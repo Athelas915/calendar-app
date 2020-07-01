@@ -1,10 +1,9 @@
 import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { Session } from '../../models/session.model';
-import { WeekDay, Time } from '@angular/common';
-import { Months } from '../../header/header.component';
+import { Time } from '@angular/common';
 
 @Component({
-  selector: 'app-single-session',
+  selector: 'app-customer-sessions',
   templateUrl: './single-session.component.html',
   styleUrls: ['./single-session.component.sass']
 })
@@ -17,23 +16,6 @@ export class SingleSessionComponent implements OnChanges {
   ngOnChanges(): void {
   }
 
-  toShortDateString(date: Date): string {
-    var result = "";
-    result += WeekDay[date.getDay()] + ", ";
-
-    var day: number = date.getDate();
-    var ord: string;
-    if (day % 10 == 1 && day != 11) ord = "st";
-    else if (day % 10 == 2 && day != 12) ord = "nd"
-    else if (day % 10 == 3 && day != 13) ord = "rd"
-    else ord = "th";
-
-    result += day + ord + " of ";
-    result += Months[date.getMonth()] + " ";
-    result += date.getFullYear();
-
-    return result;
-  }
 
   toStartTimeString(time: Time) {
     var ho;
@@ -60,9 +42,22 @@ export class SingleSessionComponent implements OnChanges {
     return ho + min;
   }
 
-  get sessionFinished(): boolean {
-    var now = new Date();
-    if (this.session.date < now) return true;
+  private get startTime() {
+    var start = this.session.date;
+    start.setHours(this.session.start.hours, this.session.duration.minutes);
+    return start;
+  }
+  private get finishTime() {
+    var finish = this.session.date;
+    finish.setHours(this.session.start.hours + this.session.duration.hours, this.session.duration.minutes + this.session.duration.minutes);
+    return finish;
+  }
+  private get now() {
+    return new Date();
+  }
+
+  get sessionStarted(): boolean {
+    if (this.startTime < this.now) return true;
     else return false;
   }
 
@@ -72,7 +67,8 @@ export class SingleSessionComponent implements OnChanges {
   }
 
   get info(): string {
-    if (this.sessionFinished) return "Finished."
+    if (this.finishTime < this.now) return "Finished."
+    else if (this.startTime < this.now) return "In progress"
     else {
       if (this.session.isEnrolled) return "Signed up.";
       else return "Not signed up."

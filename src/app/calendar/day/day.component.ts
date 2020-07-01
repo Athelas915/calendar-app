@@ -1,8 +1,8 @@
-import { Component, OnChanges, Input } from '@angular/core';
+import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { Session } from '../../models/session.model';
 import { SessionsService } from '../../services/sessions.service';
 import { ShortDate } from '../../models/short-date.model';
-import { DateAndActive } from '../calendar.component';
+import { DateAndState } from '../calendar.component';
 
 @Component({
   selector: 'app-day',
@@ -11,7 +11,8 @@ import { DateAndActive } from '../calendar.component';
 })
 export class DayComponent implements OnChanges {
   private sessionService: SessionsService;
-  @Input('date-and-active') input: DateAndActive;
+  @Input('data') input: DateAndState;
+  @Output('popup-date') output = new EventEmitter<ShortDate>();
 
   get date(): ShortDate {
     return this.input.date;
@@ -19,18 +20,20 @@ export class DayComponent implements OnChanges {
   get active(): boolean {
     return this.input.active;
   }
-
-  sessions: Session[] = [];
+  get clickable(): boolean {
+    return this.input.clickable;
+  }
+  get sessions(): Session[] {
+    return this.input.sessions;
+  }
 
   uniqueTypes: string[];
 
-  constructor(sessionsService: SessionsService) {
-    this.sessionService = sessionsService;
-    this.input = { date: new ShortDate(), active: false }
+  constructor() {
+    this.input = { date: new ShortDate(), active: false, clickable: false, sessions: [] }
   }
 
   ngOnChanges(): void {
-    this.sessions = this.sessionService.getSessionsOnDay(this.date);
     this.uniqueTypes = getUniqueTypes(this.sessions);
   }
 
@@ -48,14 +51,14 @@ export class DayComponent implements OnChanges {
     else classActive = "inactive";
 
     var classClickable: string;
-    if (this.active && this.sessions.length > 0) classClickable = "clickable";
+    if (this.clickable) classClickable = "clickable";
     else classClickable = "unclickable";
 
     return classActive + ' ' + classClickable + ' ' + today;
   }
 
   onClick() {
-    this.sessionService.popup = this.date;
+    this.output.emit(this.date);
   }
 }
 
