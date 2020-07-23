@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Session } from '../models/session.model';
 import { ShortDate } from '../models/short-date.model';
-import { Role } from '../models/user.roles';
+import { HttpClient } from '@angular/common/http';
+
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,17 +13,14 @@ export class SessionsService {
   datesAndSessions: DateWSessions[];
   sessions: Session[];
 
-  userRoles: Role[];
-
   popup: ShortDate = null;
 
   change: number = -1;
 
-  constructor() {
+  constructor(private http: HttpClient) {
     var sessions = mockData(5);
     this.sessions = sessions;
     this.datesAndSessions = splitSessions(this.sessions);
-    this.userRoles = [Role.Customer];
   }
 
   getSessionsOnDay(date: ShortDate): Session[] {
@@ -40,19 +40,6 @@ export class SessionsService {
       if (element.id == id) return true;
       else return false;
     }
-  }
-
-  get isCustomer(): boolean {
-    return this.userRoles.includes(Role.Customer);
-  }
-  get isEmployee(): boolean {
-    return this.userRoles.includes(Role.Employee);
-  }
-  get isCoach(): boolean {
-    return this.userRoles.includes(Role.Coach);
-  }
-  get isAnonymous(): boolean {
-    return this.userRoles.includes(Role.Anonymous);
   }
 }
 

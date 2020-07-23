@@ -10,7 +10,8 @@ import { DayComponent } from './calendar/day/day.component';
 import { SessionsComponent } from './sessions/sessions.component';
 import { SessionsService } from './services/sessions.service';
 import { DayTableService } from './services/day-table.service';
-import { SingleSessionComponent } from './sessions/customer/single-session.component';
+import { SingleSessionComponent } from './sessions/single/single-session.component';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,11 +25,13 @@ import { SingleSessionComponent } from './sessions/customer/single-session.compo
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
     SessionsService,
-    DayTableService
+    DayTableService,
+    HttpClient
   ],
   bootstrap: [AppComponent]
 })
