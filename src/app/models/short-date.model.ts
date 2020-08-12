@@ -24,11 +24,10 @@ export class ShortDate {
 
   constructor(d: number = null, m: number = null, y: number = null) {
     var da = d, mo = m, yr = y;
-    if (da == null || mo == null || yr == null) {
-      if (da == null) da = this.dateNow.getDate();
-      if (mo == null) mo = this.dateNow.getMonth();
-      if (yr == null) yr = this.dateNow.getFullYear();
-    }
+
+    if (da == null) da = this.dateNow.getDate();
+    if (mo == null) mo = this.dateNow.getMonth();
+    if (yr == null) yr = this.dateNow.getFullYear();
 
     this.date = new Date(yr, mo, da)
   }

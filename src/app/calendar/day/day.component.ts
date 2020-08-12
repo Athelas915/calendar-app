@@ -12,7 +12,6 @@ import { DateAndState } from '../calendar.component';
 export class DayComponent implements OnChanges {
   private sessionService: SessionsService;
   @Input('data') input: DateAndState;
-  @Output('popup-date') output = new EventEmitter<ShortDate>();
 
   get date(): ShortDate {
     return this.input.date;
@@ -29,8 +28,9 @@ export class DayComponent implements OnChanges {
 
   uniqueTypes: string[];
 
-  constructor() {
+  constructor(sessionService: SessionsService) {
     this.input = { date: new ShortDate(), active: false, clickable: false, sessions: [] }
+    this.sessionService = sessionService;
   }
 
   ngOnChanges(): void {
@@ -58,7 +58,7 @@ export class DayComponent implements OnChanges {
   }
 
   onClick() {
-    this.output.emit(this.date);
+    //Implement popup window
   }
 }
 

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Data } from './header/header.component'
 import { Session } from './models/session.model'
 import { SessionsService } from './services/sessions.service';
-import { DayTableService } from './services/day-table.service';
 import { ShortDate } from './models/short-date.model';
 import { Role } from './models/user.roles';
 

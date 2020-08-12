@@ -9,7 +9,6 @@ import { HeaderComponent } from './header/header.component';
 import { DayComponent } from './calendar/day/day.component';
 import { SessionsComponent } from './sessions/sessions.component';
 import { SessionsService } from './services/sessions.service';
-import { DayTableService } from './services/day-table.service';
 import { SingleSessionComponent } from './sessions/single/single-session.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
@@ -30,7 +29,6 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
   ],
   providers: [
     SessionsService,
-    DayTableService,
     HttpClient
   ],
   bootstrap: [AppComponent]

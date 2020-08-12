@@ -8,9 +8,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let i of weeksIt">
-        <td *ngFor="let j of daysIt">
-          <app-day [data]="getData(i,j)" (popup-date)="showPopup($event)"></app-day>
+      <tr *ngFor="let i of weekKeys">
+        <td *ngFor="let j of dayKeys">
+          <app-day [data]="getData(i,j)"></app-day>
         </td>
       </tr>
     </tbody>

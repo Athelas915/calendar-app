@@ -6,11 +6,11 @@
     </button>
   </div>
   <div class="column narrow">
-    {{curMonthName}}, {{currentYear}}
+    {{currentMonthName}}, {{currentYear}}
   </div>
   <div class="column wide">
     <select class="months vertical-center" name="months" [(ngModel)]="monthSelect">
-      <option value="" selected disabled hidden>{{curMonthName}}</option>
+      <option value="" selected disabled hidden>{{currentMonthName}}</option>
       <option *ngFor="let month of monthList, let i = index" [value]="i">
         {{month}}
       </option>

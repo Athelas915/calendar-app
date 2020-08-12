@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DayTableService } from '../services/day-table.service';
+import { CurrentMonthService } from '../services/current-month.service';
 import { ShortDate } from '../models/short-date.model';
 
 @Component({
@@ -8,33 +8,33 @@ import { ShortDate } from '../models/short-date.model';
   styleUrls: ['./header.component.sass']
 })
 export class HeaderComponent {
-  private dayTableService: DayTableService;
+  private currentMonthService: CurrentMonthService;
 
   get currentMonth() {
-    return this.dayTableService.month;
+    return this.currentMonthService.month;
   }
   get currentYear() {
-    return this.dayTableService.year;
+    return this.currentMonthService.year;
   }
   
   monthSelect: number;
   yearSelect: number;
-  curMonthName: string;
-  monthList: string[];
 
-  constructor(dayTableService: DayTableService) {
-    this.dayTableService = dayTableService;
+  get currentMonthName() { return this.currentMonthService.currentMonthName }
+
+  readonly monthList: string[];
+
+  constructor(currentMonthService: CurrentMonthService) {
+    this.currentMonthService = currentMonthService;
 
     this.monthSelect = this.currentMonth;
-    this.curMonthName = Months[this.currentMonth];
     this.yearSelect = this.currentYear;
 
     this.monthList = monthList();
   }
 
   private goTo(mo: number, yr: number) {
-    this.dayTableService.update(mo, yr);
-    this.curMonthName = Months[this.currentMonth]     
+    this.currentMonthService.update(mo, yr); 
     this.monthSelect = this.currentMonth;
     this.yearSelect = yr;
   }

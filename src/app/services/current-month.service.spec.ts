@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DayTableService } from './day-table.service';
+import { CurrentMonthService } from './current-month.service';
 
-describe('DayTableService', () => {
-  let service: DayTableService;
+describe('CurrentMonthService', () => {
+  let service: CurrentMonthService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(DayTableService);
+    service = TestBed.inject(CurrentMonthService);
   });
 
   it('should be created', () => {
