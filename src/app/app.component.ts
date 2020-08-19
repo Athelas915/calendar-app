@@ -7,11 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Fitness Club Calendar';
-  month: number;
-  year: number;
 
   constructor() {
-    this.month = 1;
-    this.year = 2020;
   }
 }

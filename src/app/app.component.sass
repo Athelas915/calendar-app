@@ -1,7 +1,51 @@
+$std-margin: 10px
+$std-width: 1024px
+$std-height: 768px
+$divider: 12
+
+$back-color: #ababab
+$fhc-color: #e3e3e3
+$day-color: #ffffff
+$day-inactive-color: #d4d4d4
+$day-hover: #a3ffa5
+
+
+$hea-foo-prop: 1 / $divider
+$calendar-prop: 1 - $hea-foo-prop
+
+$calendar-height: $std-height * $calendar-prop - $std-margin * 2 - 2px
+$calendar-width: $std-width - $std-margin * 2 - 2px
+
+$hf-height: $std-height * $hea-foo-prop - $std-margin - 2px
+$hf-width: $std-width - $std-margin * 2 - 2px
+
+$week-names: 1/24
+$week-names-size: $week-names * $calendar-height - $std-margin
+$week-names-font: $week-names-size - 2px
+$table-size: 1 - $week-names
+$day-margin: 2px
+$day-height: (($table-size * $calendar-height - $std-margin) - 2 * $std-margin - 4px) / 6 - $day-margin - 2px
+$day-width: ($calendar-width - 2 * $std-margin - 4px) / 7 - $day-margin - 2px
+
+
+
 h1
   text-align: center
 
 
-div.bordered
+body.root
+  height: $std-height
+  width: $std-width
+
+
+div
+  text-align: center
+
+
+div.root
   border: 2px solid black
-  padding: 5px
+  background-color: $back-color
+  height: $std-height
+  width: $std-width
+
+

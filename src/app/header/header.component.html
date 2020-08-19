@@ -1,3 +1,28 @@
-<div class="bordered">
-  Header placeholder with month selection
+<div class="header">
+  <div class="column arrow tooltip">
+    <button class="arrow" (click)="goPreviousMonth()">
+      <img class="arrow" src="assets/images/arrow-left.png" alt="Arrow to previous month" />
+      <span class="tooltiptext">Go to the previous month</span>
+    </button>
+  </div>
+  <div class="column narrow">
+    {{currentMonthName}}, {{currentYear}}
+  </div>
+  <div class="column wide">
+    <select class="months vertical-center" name="months" [(ngModel)]="monthSelect">
+      <option value="" selected disabled hidden>{{currentMonthName}}</option>
+      <option *ngFor="let month of monthList, let i = index" [value]="i">
+        {{month}}
+      </option>
+    </select>
+    <input type="number" class="year" pattern="[0-9]{4}" [(ngModel)]="yearSelect" />
+    <button class="submit" (click)="goToDate()">Submit</button>
+    <button class="today" (click)="goToCurrent()">Current month</button>
+  </div>
+  <div class="column arrow  tooltip">
+    <button class="arrow" (click)="goNextMonth()">
+      <img class="arrow" src="assets/images/arrow-right.png" alt="Arrow to next month" />
+      <span class="tooltiptext">Go to the next month</span>
+    </button>
+  </div>
 </div>

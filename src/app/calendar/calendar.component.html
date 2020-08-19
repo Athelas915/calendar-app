@@ -1,18 +1,19 @@
-<div class="bordered">
+<div class="calendar">
   <table class="centered">
     <thead>
-      <tr>
+      <tr class="weeknames">
         <th *ngFor="let day of weekdays">
           {{ day }}
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let week of days; let i = index">
-        <td *ngFor="let day of week">
-          <app-day [day]="day" [month]="month" [year]="year"></app-day>
+      <tr *ngFor="let i of weekKeys">
+        <td *ngFor="let j of dayKeys">
+          <app-day [data]="getData(i,j)"></app-day>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
+
