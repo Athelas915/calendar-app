@@ -17,7 +17,7 @@ export class ShortDate {
 
   private _dateNow = null;
   private get dateNow(): Date {
-    if (this._dateNow == null) this._dateNow = new Date();
+    if (this._dateNow === null) this._dateNow = new Date();
 
     return this._dateNow;
   }
@@ -25,9 +25,9 @@ export class ShortDate {
   constructor(d: number = null, m: number = null, y: number = null) {
     var da = d, mo = m, yr = y;
 
-    if (da == null) da = this.dateNow.getDate();
-    if (mo == null) mo = this.dateNow.getMonth();
-    if (yr == null) yr = this.dateNow.getFullYear();
+    if (da === null) da = this.dateNow.getDate();
+    if (mo === null) mo = this.dateNow.getMonth();
+    if (yr === null) yr = this.dateNow.getFullYear();
 
     this.date = new Date(yr, mo, da)
   }
@@ -45,17 +45,17 @@ export class ShortDate {
   }
 
   isSameAs(otherDate: ShortDate): boolean {
-    if (otherDate == undefined) return false;
-    if (this.day.valueOf() == otherDate.day.valueOf() && this.month.valueOf() == otherDate.month.valueOf() && this.year.valueOf() == otherDate.year.valueOf()) return true;
+    if (otherDate === undefined) return false;
+    if (this.day.valueOf() === otherDate.day.valueOf() && this.month.valueOf() == otherDate.month.valueOf() && this.year.valueOf() == otherDate.year.valueOf()) return true;
     else return false;
   }
 
   isBiggerThan(otherDate: ShortDate): boolean {
-    if (otherDate == undefined) return true;
+    if (otherDate === undefined) return true;
     if (
       this.year > otherDate.year
-      || (this.year == otherDate.year && this.month > otherDate.month)
-      || (this.year == otherDate.year && this.month == otherDate.month && this.day > otherDate.day)
+      || (this.year === otherDate.year && this.month > otherDate.month)
+      || (this.year === otherDate.year && this.month == otherDate.month && this.day > otherDate.day)
     ) return true;
     else return false
   }

@@ -1,8 +1,8 @@
 import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
-import { Session } from '../../models/session.model';
-import { SessionsService } from '../../services/sessions.service';
 import { ShortDate } from '../../models/short-date.model';
 import { DateAndState } from '../calendar.component';
+import { SessionCountService } from '../../services/session-count.service';
+import { SessionsOnDay } from '../../models/sessions-on-day.model';
 
 @Component({
   selector: 'app-day',
@@ -10,31 +10,38 @@ import { DateAndState } from '../calendar.component';
   styleUrls: ['./day.component.sass']
 })
 export class DayComponent implements OnChanges {
-  private sessionService: SessionsService;
+  private sessionCountService: SessionCountService;
+  private today: ShortDate;
+
   @Input('data') input: DateAndState;
 
+  get active(): boolean {
+    if (!this.today.isBiggerThan(this.date) && this.input.currentMonth) return true;
+    else return false;
+  }
+  get clickable(): boolean {
+    if (this.sessionCount > 0 && this.input.currentMonth) return true;
+    else return false;
+  }
   get date(): ShortDate {
     return this.input.date;
   }
-  get active(): boolean {
-    return this.input.active;
+  get sessionCount(): number {
+    return this.sessionData.SessionCount;
   }
-  get clickable(): boolean {
-    return this.input.clickable;
-  }
-  get sessions(): Session[] {
-    return this.input.sessions;
+  get uniqueTypes(): string {
+    return formatString(this.sessionData.SessionTypes);
   }
 
-  uniqueTypes: string[];
+  private sessionData: SessionsOnDay;
 
-  constructor(sessionService: SessionsService) {
-    this.input = { date: new ShortDate(), active: false, clickable: false, sessions: [] }
-    this.sessionService = sessionService;
+  constructor(sessionCountService: SessionCountService) {
+    this.sessionCountService = sessionCountService;
+    this.today = new ShortDate();
   }
 
   ngOnChanges(): void {
-    this.uniqueTypes = getUniqueTypes(this.sessions);
+    this.sessionData = this.sessionCountService.getSessionsOnDay(this.date);
   }
 
   
@@ -58,16 +65,17 @@ export class DayComponent implements OnChanges {
   }
 
   onClick() {
-    //Implement popup window
+    this.sessionCountService.sendDate(this.date);
   }
 }
 
-function getUniqueTypes(sessions: Session[]): string[] {
+
+function formatString(sessions: string[]): string {
   var result = [];
 
-  for (let se of sessions) {
-    if (!result.includes(" " + se.type)) {
-      result.push(" " + se.type);
+  for (let type of sessions) {
+    if (!result.includes(" " + type)) {
+      result.push(" " + type);
     }
   }
 
@@ -77,5 +85,5 @@ function getUniqueTypes(sessions: Session[]): string[] {
     }
     result[result.length - 1] += "...";
   }
-  return result;
+  return result.join(", ");
 }

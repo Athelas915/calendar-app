@@ -66,7 +66,7 @@ export class HeaderComponent {
 
 function monthList(): string[] {
   var vals = Object.values(Months).filter(function (value): boolean {
-    return typeof (value) == "string";
+    return typeof (value) === "string";
   });
   var months = vals.map(function (value): string {
     return String(value);

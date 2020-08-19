@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { WeekDay } from '@angular/common';
-import { Session } from '../models/session.model'
 import { CurrentMonthService } from '../services/current-month.service';
 import { ShortDate } from '../models/short-date.model';
-import { SessionsService } from '../services/sessions.service';
+import { SessionsOnDay } from '../models/sessions-on-day.model';
+import { SessionCountService } from '../services/session-count.service';
 
 @Component({
   selector: 'app-calendar',
@@ -11,8 +11,8 @@ import { SessionsService } from '../services/sessions.service';
   styleUrls: ['./calendar.component.sass']
 })
 export class CalendarComponent implements OnInit {
-  currentMonthService: CurrentMonthService;
-  sessionsService: SessionsService;
+  private currentMonthService: CurrentMonthService;
+  private sessionCountService: SessionCountService;
 
   private get month(): number {
     return this.currentMonthService.month;
@@ -26,9 +26,9 @@ export class CalendarComponent implements OnInit {
   weekdays: string[];
 
 
-  constructor(currentMonthService: CurrentMonthService, sessionsService: SessionsService) {
+  constructor(currentMonthService: CurrentMonthService, sessionCountService: SessionCountService) {
     this.currentMonthService = currentMonthService;
-    this.sessionsService = sessionsService;
+    this.sessionCountService = sessionCountService;
 
     this.weekKeys = [...Array(currentMonthService.weeksInMonth).keys()];
     this.dayKeys = [...Array(7).keys()];  
@@ -56,33 +56,21 @@ export class CalendarComponent implements OnInit {
     else return null;
   }
 
-  getData(i: number, j: number): DateAndState {
+  getData(i: number, j: number) {
     var today = new ShortDate();
     var date = this.getDate(i, j);
-    var sessions = this.sessionsService.getSessionsOnDay(date);
     var isCurrentMonth = date.month == this.month;
-
-    var active: boolean;
-    if (!today.isBiggerThan(date) && isCurrentMonth) active = true;
-    else active = false;
-
-    var clickable: boolean;
-    if (sessions.length > 0 && isCurrentMonth) clickable = true;
-    else clickable = false;
 
     return {
       date: date,
-      active: active,
-      clickable: clickable,
-      sessions: sessions
+      currentMonth: isCurrentMonth,
     };
   }
 }
 
+
 export type DateAndState = {
   date: ShortDate;
-  sessions: Session[]
-  active: boolean;
-  clickable: boolean;
+  currentMonth: boolean;
 }
 

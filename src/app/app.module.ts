@@ -7,19 +7,16 @@ import { AppComponent } from './app.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { HeaderComponent } from './header/header.component';
 import { DayComponent } from './calendar/day/day.component';
-import { SessionsComponent } from './sessions/sessions.component';
-import { SessionsService } from './services/sessions.service';
-import { SingleSessionComponent } from './sessions/single/single-session.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { CurrentMonthService } from './services/current-month.service';
+import { SessionCountService } from './services/session-count.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     CalendarComponent,
     HeaderComponent,
-    DayComponent,
-    SessionsComponent,
-    SingleSessionComponent
+    DayComponent
   ],
   imports: [
     BrowserModule,
@@ -28,8 +25,9 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     HttpClientModule
   ],
   providers: [
-    SessionsService,
-    HttpClient
+    HttpClient,
+    CurrentMonthService,
+    SessionCountService
   ],
   bootstrap: [AppComponent]
 })

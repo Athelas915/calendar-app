@@ -1,9 +1,9 @@
 <div class="day">
   <a [ngClass]="isClickableAndActive()" (click)="onClick()">
     <div class="padding">{{date.day}}</div>
-    <div class="sessions" *ngIf="sessions.length > 0">
+    <div class="sessions" *ngIf="sessionCount > 0">
       <div>
-        Sessions: {{ sessions.length }}
+        Sessions: {{ sessionCount }}
       </div>
       <div>{{ uniqueTypes }}</div>
     </div>
