@@ -1,8 +1,7 @@
 <div class="header">
-  <div class="column arrow tooltip">
+  <div class="column arrow">
     <button class="arrow" (click)="goPreviousMonth()">
-      <img class="arrow" src="assets/images/arrow-left.png" alt="Arrow to previous month" />
-      <span class="tooltiptext">Go to the previous month</span>
+      <img class="arrow" [src]="leftArrow" alt="Arrow to previous month" />
     </button>
   </div>
   <div class="column narrow">
@@ -19,10 +18,9 @@
     <button class="submit" (click)="goToDate()">Submit</button>
     <button class="today" (click)="goToCurrent()">Current month</button>
   </div>
-  <div class="column arrow  tooltip">
+  <div class="column arrow">
     <button class="arrow" (click)="goNextMonth()">
-      <img class="arrow" src="assets/images/arrow-right.png" alt="Arrow to next month" />
-      <span class="tooltiptext">Go to the next month</span>
+      <img class="arrow" [src]="rightArrow" alt="Arrow to next month" />
     </button>
   </div>
 </div>

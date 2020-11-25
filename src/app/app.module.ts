@@ -10,6 +10,7 @@ import { DayComponent } from './calendar/day/day.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { CurrentMonthService } from './services/current-month.service';
 import { SessionCountService } from './services/session-count.service';
+import { APP_BASE_HREF } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,11 @@ import { SessionCountService } from './services/session-count.service';
     FormsModule,
     HttpClientModule
   ],
+  exports: [
+    AppComponent
+  ],
   providers: [
+    { provide: APP_BASE_HREF, useValue: '/calendar' },
     HttpClient,
     CurrentMonthService,
     SessionCountService

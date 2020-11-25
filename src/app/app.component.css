@@ -1,0 +1,18 @@
+body.root {
+  height: 768px;
+  width: 1024px;
+}
+
+
+div {
+  text-align: center
+}
+
+div.root {
+  border: 2px solid black;
+  background-color: #ababab;
+  height: 768px;
+  width: 1024px;
+}
+
+

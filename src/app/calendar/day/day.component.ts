@@ -7,7 +7,7 @@ import { SessionsOnDay } from '../../models/sessions-on-day.model';
 @Component({
   selector: 'app-day',
   templateUrl: './day.component.html',
-  styleUrls: ['./day.component.sass']
+  styleUrls: ['./day.component.css']
 })
 export class DayComponent implements OnChanges {
   private sessionCountService: SessionCountService;

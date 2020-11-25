@@ -8,7 +8,7 @@ import { SessionCountService } from '../services/session-count.service';
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.sass']
+  styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
   private currentMonthService: CurrentMonthService;

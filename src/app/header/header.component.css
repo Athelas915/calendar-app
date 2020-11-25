@@ -1,0 +1,75 @@
+div.header {
+  background-color: #e3e3e3;
+  border: 1px solid black;
+  margin: 10px;
+  height: 64px;
+  width: 1004px;
+}
+
+
+
+div.column {
+  float: left;
+  padding: 5px;
+  width: 100px;
+}
+
+
+div.wide {
+  width: 575px;
+}
+
+
+div.narrow {
+  font-size: 38px;
+  width: 313px;
+  text-align: center;
+}
+
+
+
+div.arrow {
+  width: 50px;
+}
+
+
+button.arrow {
+  border: 1px solid black;
+  height: 54px;
+  width: 54px;
+}
+
+
+img.arrow {
+  height: 40px;
+  width: 40px;
+}
+
+button.today {
+  border: 1px solid black;
+  font-size: 26px;
+  height: 54px;
+  margin-left: 10px;
+}
+
+button.submit {
+  border: 1px solid black;
+  font-size: 26px;
+  height: 54px;
+  margin-left: 10px;
+}
+
+select.months {
+  border: 1px solid black;
+  font-size: 26px;
+  height: 54px;
+  margin-left: 10px;
+}
+
+input.year {
+  border: 1px solid black;
+  font-size: 26px;
+  width: 90px;
+  height: 54px;
+  margin-left: 10px;
+}

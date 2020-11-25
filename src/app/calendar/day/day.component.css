@@ -1,0 +1,63 @@
+div.day {
+  text-align: left;
+  border: 1px solid black;
+  height: 92px;
+  width: 134px;
+  margin: 2px;
+  background-color: #ffffff;
+}
+
+a.active {
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  color: black;
+  background-color: #ffffff;
+}
+
+a.inactive {
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  color: black;
+  background-color: #d4d4d4;
+}
+
+a.clickable {
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  color: black;
+  position: relative;
+}
+
+  a.clickable:hover {
+    background-color: #a3ffa5;
+  }
+
+a.unclickable {
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  color: black;
+  pointer-events: none;
+}
+
+div.padding {
+  text-align: left;
+  margin-left: 10px;
+}
+
+a.today {
+  background-color: #9ec3ff;
+}
+
+div.sessions {
+  font-size: 12px;
+  margin-left: 10px;
+  margin-right: 10px;
+}

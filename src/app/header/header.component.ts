@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CurrentMonthService } from '../services/current-month.service';
 import { ShortDate } from '../models/short-date.model';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.sass']
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
   private currentMonthService: CurrentMonthService;
@@ -31,6 +32,28 @@ export class HeaderComponent {
     this.yearSelect = this.currentYear;
 
     this.monthList = monthList();
+
+    this.env = environment.production;
+  }
+  private env: boolean;
+  private defaultSrc: string = "assets/images/arrow-";
+  private prodSrc: string = "/angular/dist/calendar-app/";
+
+  get rightArrow(): string {
+    if (this.env) {
+      return this.prodSrc + this.defaultSrc + "right.png";
+    }
+    else {
+      return this.defaultSrc + "right.png";
+    }
+  }
+  get leftArrow(): string {
+    if (this.env) {
+      return this.prodSrc + this.defaultSrc + "left.png";
+    }
+    else {
+      return this.defaultSrc + "left.png";
+    }
   }
 
   private goTo(mo: number, yr: number) {

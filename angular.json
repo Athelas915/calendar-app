@@ -7,7 +7,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "sass"
+          "style": "css"
         }
       },
       "root": "",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/calendar-app",
+            "outputPath": "../../FitnessClub/FitnessClub/wwwroot/angular/dist/calendar-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -28,7 +28,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles.css",
+              "src/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": []
           },
@@ -69,8 +70,8 @@
             "browserTarget": "calendar-app:build"
           },
           "configurations": {
-            "production": {
-              "browserTarget": "calendar-app:build:production"
+            "development": {
+              "browserTarget": "calendar-app:build"
             }
           }
         },
@@ -92,7 +93,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles.css"
             ],
             "scripts": []
           }
